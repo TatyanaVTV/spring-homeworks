@@ -1,10 +1,14 @@
-package ru.vtvhw.athletics;
+package ru.vtvhw.athletics.service;
 
+import ru.vtvhw.athletics.model.Distance;
 import ru.vtvhw.athletics.model.Gender;
+import ru.vtvhw.athletics.model.Result;
 
+import java.nio.file.Path;
 import java.util.List;
+import java.util.Set;
 
 public interface ResultsProcessor {
-    void loadResults();
-    List<String> topRunners(int count, int distance, Gender gender);
+    Set<Result> loadResultsFromFile(Path filePath);
+    List<Result> topRunners(Gender gender, Distance distance, int limit);
 }

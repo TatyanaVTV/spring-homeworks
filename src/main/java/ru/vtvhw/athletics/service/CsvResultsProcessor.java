@@ -1,29 +1,46 @@
-package ru.vtvhw.athletics;
+package ru.vtvhw.athletics.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import ru.vtvhw.athletics.model.Distance;
 import ru.vtvhw.athletics.model.Gender;
-import ru.vtvhw.athletics.model.Athlete;
+import ru.vtvhw.athletics.model.Result;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+@Service
 public class CsvResultsProcessor implements ResultsProcessor {
-    private Map<Athlete, String> loadedResults;
+    private Set<Result> loadedResults;
+
+    @Autowired
+    private ResultParser resultParser;
+
+    public CsvResultsProcessor(ResultParser parser) {
+        this.resultParser = parser;
+    }
 
     @Override
-    public void loadResults() {
-        loadedResults = new HashMap<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader("classpath:AthleticResults.csv"))) {
-            String nextResult = reader.readLine();
+    public Set<Result> loadResultsFromFile(Path filePath) {
+        try(Stream<String> stream = Files.lines(filePath);) {
+            loadedResults = stream.map(resultParser::parseResult)
+                    .collect(Collectors.toSet());
+            return loadedResults;
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UncheckedIOException(e);
         }
     }
 
     @Override
-    public List<String> topRunners(int count, int distance, Gender gender) {
-        return List.of();
+    public List<Result> topRunners(Gender gender, Distance distance, int limit) {
+        return loadedResults.stream()
+                .filter(result -> result.hasDistance(distance) && result.hasGender(gender))
+                .sorted(Result.timeComparator())
+                .limit(limit)
+                .collect(Collectors.toList());
     }
 }

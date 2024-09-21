@@ -1,4 +1,4 @@
-package ru.vtvhw.athletics;
+package ru.vtvhw.athletics.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
