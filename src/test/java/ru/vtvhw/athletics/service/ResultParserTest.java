@@ -1,7 +1,6 @@
 package ru.vtvhw.athletics.service;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -12,7 +11,6 @@ import ru.vtvhw.athletics.model.Result;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;

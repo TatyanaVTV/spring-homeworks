@@ -7,7 +7,6 @@ import ru.vtvhw.athletics.model.Gender;
 import ru.vtvhw.athletics.service.CsvResultsProcessor;
 
 import java.net.URISyntaxException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class AthleticsMain {

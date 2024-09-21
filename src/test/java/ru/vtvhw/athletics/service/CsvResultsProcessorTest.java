@@ -12,21 +12,6 @@ import java.nio.file.Paths;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CsvResultsProcessorTest {
-//    private static final String FAKE_CSV = """
-//            Вторая;F;10 km;01:08:38
-//            Третья;F;10 km;01:12:88
-//            Первая;F;10 km;01:07:57
-//            Второй;M;10 km;00:55:37
-//            Первый;M;10 km;00:54:09
-//            Третий;M;10 km;00:56:12
-//            Третья;F;5 km;00:37:28
-//            Первая;F;5 km;00:35:47
-//            Вторая;F;5 km;00:35:53
-//            Второй;M;5 km;00:29:49
-//            Третий;M;5 km;00:30:18
-//            Первый;M;5 km;00:29:45
-//            """.trim();
-
     @Test
     void testLoadResultsFromFile() throws URISyntaxException {
         var filePath = Paths.get(AthleticsMain.class.getClassLoader().getResource("AthleticResults.csv").toURI());
